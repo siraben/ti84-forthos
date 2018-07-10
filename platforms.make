@@ -2,6 +2,15 @@
 #
 # Defines constants and targets for each platform
 
+# Defaults
+PLATFORM := TI84pSE
+DEVICE := TI-84+SE
+PRIVILEGED := 1F0000
+KEY := 0A
+UPGRADEEXT := 8xu
+BOOT := 1FC000
+LENGTH := 0x200000
+
 TI73: PLATFORM := TI73
 TI73: DEVICE := TI-73
 TI73: PRIVILEGED := 70000

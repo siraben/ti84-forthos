@@ -63,4 +63,5 @@ boot:
 #endif
     call lock_flash
 
-    jr $
+.import _main
+    jp _main

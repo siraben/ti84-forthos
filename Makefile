@@ -1,11 +1,12 @@
 # `make` will build for the TI-84+ SE by default.
 # Use e.g. `make TI73` to build for another platform
 include platforms.make
-PLATFORM:=TI84pSE
 .DEFAULT_GOAL=TI84pSE
 
 AS=scas
 ASFLAGS=-Iinclude/ -fexplicit-import -D$(PLATFORM)
+CC=kcc
+CFLAGS=-Iinclude/
 
 OUTDIR:=.build
 
@@ -15,8 +16,11 @@ FLASH_PAGES=00
 # Targets for page 00
 PAGE_00=\
 	$(OUTDIR)/00/boot.S.o \
+	$(OUTDIR)/00/display.c.o \
+	$(OUTDIR)/00/display.S.o \
 	$(OUTDIR)/00/flash.S.o \
-	$(OUTDIR)/00/interrupt.S.o
+	$(OUTDIR)/00/interrupt.S.o \
+	$(OUTDIR)/00/main.c.o
 
 # Targets for the boot page, whose assignment varies from model to model
 PAGE_BOOT=\
@@ -62,6 +66,10 @@ hiti-%.8cu: hiti-%.rom
 $(OUTDIR)/%.S.o: src/%.S $(wildcard include/*.asm)
 	@mkdir -p $(shell dirname $@)
 	$(AS) $(ASFLAGS) -c -o $@ $<
+
+$(OUTDIR)/%.c.o: src/%.c $(wildcard include/*.h)
+	@mkdir -p $(shell dirname $@)
+	$(CC) $(CFLAGS) -c -o $@ $<
 
 $(OUTDIR)/%.bin: $(OUTDIR)/%.o
 	$(AS) $(ASFLAGS) -o $@ $^
