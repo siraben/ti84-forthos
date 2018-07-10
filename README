@@ -1,0 +1,26 @@
+                                    Hi, TI!
+
+hiti is a minimal template for building an operating system for TI calculators.
+
+                                  DEPENDENCIES
+
+The build process depends on the following tools:
+
+scas            https://github.com/KnightOS/scas
+mkrom           https://github.com/KnightOS/mkrom
+mktiupgrade     https://github.com/KnightOS/mktiupgrade
+
+And for debugging, optionally depends on:
+
+z80e            https://github.com/KnightOS/z80e
+
+                                   COMPILING
+
+To compile for a platform, use `make $PLATFORM`. See platforms.make for a list
+of available platforms. If unspecified, we build for the TI-84+ SE.
+
+                                   DEBUGGING
+
+Use the `make z80e` target to run your OS in the z80e debugger. Press Ctrl+C at
+the terminal to interrupt execution and examine the calculator's state. The ?
+command will print available debugger commands.
