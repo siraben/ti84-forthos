@@ -1,5 +1,6 @@
 #include <constants.asm>
 #include <platform.asm>
+#include <flash.asm>
 
 boot:
     di
@@ -42,8 +43,24 @@ boot:
     xor a
     out (PORT_INT_MASK), a
 
-    jr $
+    ; Remove RAM/Flash execution protection so we can execute code from anywhere
+    call unlock_flash
+#ifdef CPU15
+    xor a
+    out (PORT_RAMEXEC_LOWLIMIT), a
+    dec a
+    out (PORT_RAMEXEC_UPLIMIT), a
+    out (PORT_FLASHEXEC_LOWLIMIT), a 
+    out (PORT_FLASHEXEC_UPLIMIT), a
+#else
+    xor a
+    out (PORT_RAM_PAGING), a
+    out (PORT_FLASHEXCLUSION), a
+    inc a
+    out (PORT_RAM_PAGING), a
+    xor a
+    out (PORT_FLASHEXCLUSION), a
+#endif
+    call lock_flash
 
-interrupt:
-    ; TODO: Fill this in with something interesting
-    ret
+    jr $

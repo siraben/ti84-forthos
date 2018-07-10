@@ -21,6 +21,10 @@ of available platforms. If unspecified, we build for the TI-84+ SE.
 
                                    DEBUGGING
 
-Use the `make z80e` target to run your OS in the z80e debugger. Press Ctrl+C at
-the terminal to interrupt execution and examine the calculator's state. The ?
-command will print available debugger commands.
+Use the `make z80e` target to run your OS in the z80e debugger. You should see a
+prompt waiting for you to enter debugger commands - use "run" to start running
+the CPU. You can pause execution again by hitting Ctrl+C in the debugger
+console. Use "?" for a list of debugger commands.
+
+If you put "set knightos" into ~/.config/z80erc, it'll show your original source
+code in the debugger.

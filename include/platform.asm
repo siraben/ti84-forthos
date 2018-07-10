@@ -87,61 +87,7 @@
     in a, (7)
 .endmacro
 #else
-.macro SET_BANK_A
-    call color_pageBankA
-.endmacro
 
-.macro SET_BANK_A(page)
-.if page & 0x80
-    ld a, 1
-    out (0x0E), a
-    ld a, page & 0x7F
-    out (6), a
-    ld a, page
-.else
-    xor a
-    out (0x0E), a
-    ld a, page & 0x7F
-    out (6), a
-.endif
-.endmacro
+; TODO: Flesh out color support
 
-.macro GET_BANK_A
-    push bc
-        in a, (0x0E)
-        ld c, a
-        rrc c
-        in a, (6)
-        or c
-    pop bc
-.endmacro
-
-.macro SET_BANK_B
-    call color_pageBankB
-.endmacro
-
-.macro SET_BANK_B(page)
-.if page & 0x80
-    ld a, 1
-    out (0x0F), a
-    ld a, page & 0x7F
-    out (7), a
-    ld a, page
-.else
-    xor a
-    out (0x0F), a
-    ld a, page & 0x7F
-    out (7), a
-.endif
-.endmacro
-
-.macro GET_BANK_B
-    push bc
-        in a, (0x0F)
-        ld c, a
-        rrc c
-        in a, (7)
-        or c
-    pop bc
-.endmacro
 #endif
