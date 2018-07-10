@@ -1,7 +1,7 @@
 ; TI-8x constants
 .macro define_mask(name, bitN)
-    .equ BIT_name bitN \
-    .equ name 1 << bitN
+    .equ BIT_name, bitN
+    .equ name, 1 << bitN
 .endmacro
 
 .equ MONO_LCD_WIDTH   96
@@ -63,15 +63,15 @@ define_mask(LINKPORT_ASSIST_BUSY, 6)
 
 .equ PORT_BANKA 6
     ; 73/83+ BE only
-    define_mask(BANKA_ISRAM_CPU6, 6)
+    define_mask(BANKA_ISRAM_6MHZ, 6)
     ; 83+ SE/84+ only
-    define_mask(BANKA_ISRAM_CPU15, 7)
+    define_mask(BANKA_ISRAM_15MHZ, 7)
 
 .equ PORT_BANKB 7
     ; 73/83+ BE only
-    define_mask(BANKB_ISRAM_CPU6, 6)
+    define_mask(BANKB_ISRAM_6MHZ, 6)
     ; 83+ SE/84+ only
-    define_mask(BANKB_ISRAM_CPU15, 7)
+    define_mask(BANKB_ISRAM_15MHZ, 7)
 
 .equ PORT_LINK_ASSIST_ENABLE 8
     define_mask(LA_ENABLE_INT_RX, 0)

@@ -27,7 +27,7 @@ kernel-%.rom: $(OUTDIR)/page00.bin $(OUTDIR)/boot.bin
 		$(OUTDIR)/page00.bin:0x00 \
 		$(OUTDIR)/boot.bin:0x$(BOOT)
 
-$(OUTDIR)/%.S.o: src/%.S
+$(OUTDIR)/%.S.o: src/%.S $(wildcard include/*.asm)
 	@mkdir -p $(shell dirname $@)
 	$(AS) $(ASFLAGS) -c -o $@ $<
 
