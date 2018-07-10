@@ -20,6 +20,9 @@ z80e            https://github.com/KnightOS/z80e
 To compile for a platform, use `make $PLATFORM`. See platforms.make for a list
 of available platforms. If unspecified, we build for the TI-84+ SE.
 
+The outputs are hiti-$PLATFORM.rom (for emulators and debuggers) and
+hiti-$PLATFORM.8xu (for installing on a real calculator).
+
                                    DEBUGGING
 
 Use the `make z80e` target to run your OS in the z80e debugger. You should see a
