@@ -9,6 +9,9 @@ ASFLAGS=-Iinclude/ -fexplicit-import -D$(PLATFORM)
 
 OUTDIR:=.build
 
+# Space delimited list of flash pages to include in upgrade files
+FLASH_PAGES=00
+
 # Targets for page 00
 PAGE_00=\
 	$(OUTDIR)/00/boot.S.o \
@@ -32,11 +35,29 @@ $(OUTDIR)/boot.o: $(PAGE_BOOT)
 $(OUTDIR)/privileged.o: $(PAGE_PRIVILEGED)
 	$(AS) -c $(ASFLAGS) -forigin=0x4000 -fexplicit-export -o $@ $^
 
-kernel-%.rom: $(OUTDIR)/page00.bin $(OUTDIR)/boot.bin $(OUTDIR)/privileged.bin
-	mkrom kernel-$(PLATFORM).rom $(LENGTH) \
+hiti-%.rom: $(OUTDIR)/page00.bin $(OUTDIR)/boot.bin $(OUTDIR)/privileged.bin
+	mkrom hiti-$(PLATFORM).rom $(LENGTH) \
 		$(OUTDIR)/page00.bin:0x00 \
 		$(OUTDIR)/boot.bin:0x$(BOOT) \
 		$(OUTDIR)/privileged.bin:0x$(PRIVILEGED) \
+
+hiti-%.73u: hiti-%.rom
+	mktiupgrade -p -k keys/$(KEY).key -d $(DEVICE) \
+		hiti-$(PLATFORM).rom \
+		hiti-$(PLATFORM).73u \
+		$(FLASH_PAGES)
+
+hiti-%.8xu: hiti-%.rom
+	mktiupgrade -p -k keys/$(KEY).key -d $(DEVICE) \
+		hiti-$(PLATFORM).rom \
+		hiti-$(PLATFORM).8xu \
+		$(FLASH_PAGES)
+
+hiti-%.8cu: hiti-%.rom
+	mktiupgrade -p -k keys/$(KEY).key -d $(DEVICE) \
+		hiti-$(PLATFORM).rom \
+		hiti-$(PLATFORM).8cu \
+		$(FLASH_PAGES)
 
 $(OUTDIR)/%.S.o: src/%.S $(wildcard include/*.asm)
 	@mkdir -p $(shell dirname $@)
@@ -46,9 +67,9 @@ $(OUTDIR)/%.bin: $(OUTDIR)/%.o
 	$(AS) $(ASFLAGS) -o $@ $^
 
 clean:
-	rm -rf .build kernel-*.rom
+	rm -rf .build hiti-*.rom hiti-*.73u hiti-*.8xu hiti-*.8cu
 
-z80e: kernel-$(PLATFORM).rom $(OUTDIR)/page00.o
+z80e: hiti-$(PLATFORM).rom $(OUTDIR)/page00.o
 	z80e-sdl -d $(PLATFORM) --debug \
 		-o $(OUTDIR)/page00.o \
 		-o $(OUTDIR)/boot.o \
