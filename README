@@ -6,6 +6,7 @@ hiti is a minimal template for building an operating system for TI calculators.
 
 The build process depends on the following tools:
 
+kcc             https://github.com/KnightOS/kcc
 scas            https://github.com/KnightOS/scas
 mkrom           https://github.com/KnightOS/mkrom
 mktiupgrade     https://github.com/KnightOS/mktiupgrade
