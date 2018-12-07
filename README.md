@@ -10,11 +10,12 @@ Nothing implemented yet.
 ## Dependencies
 The build process depends on the following tools:
 
-| :---:                                                  |
-| [kcc](https://github.com/KnightOS/kcc)                 |
-| [scas](https://github.com/KnightOS/scas)               |
-| [mkrom](https://github.com/KnightOS/mkrom)             |
-| [mktiupgrade](https://github.com/KnightOS/mktiupgrade) |
+| Tool        | Link to Repository                      |
+| :---:       | :---:                                   |
+| kcc         | https://github.com/KnightOS/kcc         |
+| scas        | https://github.com/KnightOS/scas        |
+| mkrom       | https://github.com/KnightOS/mkrom       |
+| mktiupgrade | https://github.com/KnightOS/mktiupgrade |
 
 [z80e](https://github.com/KnightOS/z80e) is optional but having it
 will allow you run it emulated.
