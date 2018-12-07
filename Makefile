@@ -1,7 +1,7 @@
 # `make` will build for the TI-84+ SE by default.
 # Use e.g. `make TI73` to build for another platform
 include platforms.make
-.DEFAULT_GOAL=TI84pSE
+.DEFAULT_GOAL=TI84p
 
 AS=scas
 ASFLAGS=-Iinclude/ -fexplicit-import -D$(PLATFORM)

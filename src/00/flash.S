@@ -1,5 +1,7 @@
 #include <constants.asm>
 #include <platform.asm>
+.equ PRIVILEGED_PAGE 0x3C
+.equ BOOT_PAGE       0x3F
 
 rst 0 ; Prevent runaway code from unlocking flash
 
