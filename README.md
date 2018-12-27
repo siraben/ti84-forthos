@@ -1,3 +1,5 @@
+# This project has been archived, see its successor, https://github.com/siraben/zkeme80
+
 # ti84-forthos - a Forth-based OS for the TI-84+ calculator
 **ti84-forthos** is an operating system that is designed from the
 ground up to revolve around the *Forth* programming language.  See the
